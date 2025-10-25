@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos de Animações CSS com Bootstrap</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Nosso arquivo de animações -->
+    <link rel="stylesheet" href="/Public/Css/animacoes.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .demo-card {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .animation-box {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        
+        .btn-demo {
+            margin: 5px;
+        }
+        
+        .icon-demo {
+            font-size: 48px;
+            color: #007bff;
+            margin: 10px;
+            cursor: pointer;
+        }
+        
+        .card-demo {
+            width: 200px;
+            height: 120px;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        .section-title {
+            color: #495057;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .demo-item {
+            text-align: center;
+        }
+        
+        .demo-label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-5">
+            <i class="fas fa-magic"></i> Animações CSS com Bootstrap
+        </h1>
+        
+        <!-- Seção: Animações de Pulse -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-heartbeat"></i> Animações de Pulse
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-pulse">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="demo-label">Pulse Normal</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-pulse-slow">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="demo-label">Pulse Lento</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-pulse-fast">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="demo-label">Pulse Rápido</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Botões Bootstrap:</h5>
+            <button class="btn btn-primary animate-pulse">Botão com Pulse</button>
+            <button class="btn btn-success animate-pulse-slow">Botão com Pulse Lento</button>
+            <button class="btn btn-danger animate-pulse-fast">Botão com Pulse Rápido</button>
+        </div>
+        
+        <!-- Seção: Animações de Bounce -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-basketball-ball"></i> Animações de Bounce
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-bounce">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="demo-label">Bounce Normal</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-bounce-light">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="demo-label">Bounce Leve</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-bounce-strong">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="demo-label">Bounce Forte</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Ícones:</h5>
+            <i class="fas fa-envelope icon-demo animate-bounce"></i>
+            <i class="fas fa-bell icon-demo animate-bounce-light"></i>
+            <i class="fas fa-exclamation-triangle icon-demo animate-bounce-strong"></i>
+        </div>
+        
+        <!-- Seção: Animações de Movimento (Slide) -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-arrows-alt-h"></i> Animações de Movimento (Slide)
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-slide-in-left">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="demo-label">Slide In Left</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-slide-in-right">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="demo-label">Slide In Right</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-slide-in-up">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <div class="demo-label">Slide In Up</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-slide-in-down">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <div class="demo-label">Slide In Down</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Cards Bootstrap:</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card-demo animate-slide-in-left">
+                        <h6>Card 1</h6>
+                        <small>Slide da esquerda</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-demo animate-slide-in-right">
+                        <h6>Card 2</h6>
+                        <small>Slide da direita</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-demo animate-slide-in-up">
+                        <h6>Card 3</h6>
+                        <small>Slide de baixo</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-demo animate-slide-in-down">
+                        <h6>Card 4</h6>
+                        <small>Slide de cima</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção: Animações de Rotação -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-sync-alt"></i> Animações de Rotação
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-rotate">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="demo-label">Rotação Normal</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-rotate-slow">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="demo-label">Rotação Lenta</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-rotate-fast">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="demo-label">Rotação Rápida</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Spinners Bootstrap:</h5>
+            <div class="spinner-border text-primary animate-rotate" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-border text-success animate-rotate-slow" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-border text-danger animate-rotate-fast" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        
+        <!-- Seção: Animações de Fade -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-eye"></i> Animações de Fade
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-fade-in">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="demo-label">Fade In</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-fade-out">
+                        <i class="fas fa-minus"></i>
+                    </div>
+                    <div class="demo-label">Fade Out</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Alerts Bootstrap:</h5>
+            <div class="alert alert-info animate-fade-in" role="alert">
+                <i class="fas fa-info-circle"></i> Alerta com Fade In
+            </div>
+            <div class="alert alert-warning animate-fade-out" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> Alerta com Fade Out
+            </div>
+        </div>
+        
+        <!-- Seção: Animações de Zoom -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-search-plus"></i> Animações de Zoom
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-zoom-in">
+                        <i class="fas fa-expand"></i>
+                    </div>
+                    <div class="demo-label">Zoom In</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-zoom-out">
+                        <i class="fas fa-compress"></i>
+                    </div>
+                    <div class="demo-label">Zoom Out</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Imagens:</h5>
+            <img src="https://picsum.photos/seed/zoom1/150/150.jpg" class="img-fluid animate-zoom-in" alt="Zoom In">
+            <img src="https://picsum.photos/seed/zoom2/150/150.jpg" class="img-fluid animate-zoom-out" alt="Zoom Out">
+        </div>
+        
+        <!-- Seção: Animações de Shake -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-bell"></i> Animações de Shake
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-shake">
+                        <i class="fas fa-exclamation"></i>
+                    </div>
+                    <div class="demo-label">Shake Normal</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-shake-strong">
+                        <i class="fas fa-exclamation"></i>
+                    </div>
+                    <div class="demo-label">Shake Forte</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Formulários Bootstrap:</h5>
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control animate-shake" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Campo inválido!</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Senha</label>
+                    <input type="password" class="form-control animate-shake-strong" id="exampleInputPassword1">
+                    <div class="form-text">Senha muito curta!</div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Seção: Animações de Flip -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-sync"></i> Animações de Flip
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-flip">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="demo-label">Flip Normal</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-flip-horizontal">
+                        <i class="fas fa-redo"></i>
+                    </div>
+                    <div class="demo-label">Flip Horizontal</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Cards Bootstrap:</h5>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body animate-flip">
+                    <h5 class="card-title">Card com Flip</h5>
+                    <p class="card-text">Este card tem uma animação de flip quando carregado.</p>
+                    <a href="#" class="btn btn-primary">Ver mais</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção: Animações de Float -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-cloud"></i> Animações de Float
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-float">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="demo-label">Float Normal</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-float-light">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="demo-label">Float Leve</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Badges Bootstrap:</h5>
+            <span class="badge bg-primary animate-float">Notificação</span>
+            <span class="badge bg-success animate-float-light">Novo</span>
+            <span class="badge bg-danger animate-float">Urgente</span>
+        </div>
+        
+        <!-- Seção: Animações de Wobble -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-balance-scale"></i> Animações de Wobble
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-wobble">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="demo-label">Wobble</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Botões Bootstrap:</h5>
+            <button class="btn btn-warning animate-wobble">Clique para Wobble</button>
+            <button class="btn btn-info animate-wobble">Outro Botão</button>
+        </div>
+        
+        <!-- Seção: Animações Especiais -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i> Animações Especiais
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box animate-tada">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="demo-label">Tada</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-flash">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="demo-label">Flash</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-rubber-band">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <div class="demo-label">Rubber Band</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-jello">
+                        <i class="fas fa-grip-horizontal"></i>
+                    </div>
+                    <div class="demo-label">Jello</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-heartbeat">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="demo-label">Heartbeat</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box animate-glitch">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="demo-label">Glitch</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Ícones:</h5>
+            <i class="fas fa-trophy icon-demo animate-tada"></i>
+            <i class="fas fa-lightbulb icon-demo animate-flash"></i>
+            <i class="fas fa-expand icon-demo animate-rubber-band"></i>
+            <i class="fas fa-grip-lines icon-demo animate-jello"></i>
+            <i class="fas fa-heart icon-demo animate-heartbeat"></i>
+            <i class="fas fa-desktop icon-demo animate-glitch"></i>
+        </div>
+        
+        <!-- Seção: Animações no Hover -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-mouse-pointer"></i> Animações no Hover
+            </h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="animation-box hover-animate-pulse">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <div class="demo-label">Hover Pulse</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box hover-animate-bounce">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <div class="demo-label">Hover Bounce</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box hover-animate-shake">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <div class="demo-label">Hover Shake</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box hover-animate-rotate">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <div class="demo-label">Hover Rotate</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box hover-animate-zoom">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <div class="demo-label">Hover Zoom</div>
+                </div>
+                <div class="demo-item">
+                    <div class="animation-box hover-animate-wobble">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <div class="demo-label">Hover Wobble</div>
+                </div>
+            </div>
+            
+            <h5>Exemplo com Botões Bootstrap:</h5>
+            <button class="btn btn-primary hover-animate-pulse">Hover Pulse</button>
+            <button class="btn btn-success hover-animate-bounce">Hover Bounce</button>
+            <button class="btn btn-danger hover-animate-shake">Hover Shake</button>
+            <button class="btn btn-info hover-animate-rotate">Hover Rotate</button>
+            <button class="btn btn-warning hover-animate-zoom">Hover Zoom</button>
+            <button class="btn btn-secondary hover-animate-wobble">Hover Wobble</button>
+        </div>
+        
+        <!-- Seção: Combinações de Animações -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-layer-group"></i> Combinações de Animações
+            </h2>
+            <h5>Exemplo 1: Card com múltiplas animações</h5>
+            <div class="card animate-slide-in-up animate-pulse-slow" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Card Animado</h5>
+                    <p class="card-text">Este card tem slide in e pulse lento.</p>
+                    <a href="#" class="btn btn-primary">Ação</a>
+                </div>
+            </div>
+            
+            <h5 class="mt-4">Exemplo 2: Botão com delay</h5>
+            <button class="btn btn-success animate-bounce delay-2s">Botão com Delay</button>
+            
+            <h5 class="mt-4">Exemplo 3: Ícone com duração personalizada</h5>
+            <i class="fas fa-cog icon-demo animate-rotate duration-5s"></i>
+            
+            <h5 class="mt-4">Exemplo 4: Alert com animação infinita</h5>
+            <div class="alert alert-danger animate-flash animate-infinite" role="alert">
+                <i class="fas fa-exclamation-triangle"></i> Alerta com animação infinita!
+            </div>
+        </div>
+        
+        <!-- Seção: Como Usar -->
+        <div class="demo-card">
+            <h2 class="section-title">
+                <i class="fas fa-code"></i> Como Usar as Animações
+            </h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>1. Incluir o CSS</h5>
+                    <pre><code>&lt;link rel="stylesheet" href="animacoes.css"&gt;</code></pre>
+                    
+                    <h5>2. Aplicar classes de animação</h5>
+                    <pre><code>&lt;div class="animate-pulse"&gt;Conteúdo&lt;/div&gt;
+&lt;button class="btn btn-primary animate-bounce"&gt;Botão&lt;/button&gt;
+&lt;i class="fas fa-heart animate-pulse-fast"&gt;&lt;/i&gt;</code></pre>
+                    
+                    <h5>3. Animações no hover</h5>
+                    <pre><code>&lt;div class="hover-animate-pulse"&gt;Hover aqui&lt;/div&gt;
+&lt;button class="hover-animate-bounce"&gt;Hover no botão&lt;/button&gt;</code></pre>
+                </div>
+                <div class="col-md-6">
+                    <h5>4. Classes de delay</h5>
+                    <pre><code>&lt;div class="animate-bounce delay-1s"&gt;Delay 1s&lt;/div&gt;
+&lt;div class="animate-bounce delay-2s"&gt;Delay 2s&lt;/div&gt;
+&lt;div class="animate-bounce delay-3s"&gt;Delay 3s&lt;/div&gt;</code></pre>
+                    
+                    <h5>5. Classes de duração</h5>
+                    <pre><code>&lt;div class="animate-rotate duration-1s"&gt;1s&lt;/div&gt;
+&lt;div class="animate-rotate duration-2s"&gt;2s&lt;/div&gt;
+&lt;div class="animate-rotate duration-3s"&gt;3s&lt;/div&gt;</code></pre>
+                    
+                    <h5>6. Animações infinitas</h5>
+                    <pre><code>&lt;div class="animate-pulse animate-infinite"&gt;Infinito&lt;/div&gt;
+&lt;div class="animate-rotate animate-infinite"&gt;Sempre girando&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Adicionar evento de clique para demonstrar animações
+        document.querySelectorAll('.animation-box, .card-demo, .icon-demo, .btn-demo').forEach(element => {
+            element.addEventListener('click', function() {
+                // Remover todas as classes de animação
+                this.className = this.className.replace(/animate-\w+/g, '');
+                
+                // Forçar reflow
+                void this.offsetWidth;
+                
+                // Adicionar novamente as classes de animação
+                const originalClasses = this.className;
+                if (this.classList.contains('animation-box')) {
+                    this.className = 'animation-box ' + originalClasses.split(' ').filter(c => c !== 'animation-box').join(' ');
+                } else if (this.classList.contains('card-demo')) {
+                    this.className = 'card-demo ' + originalClasses.split(' ').filter(c => c !== 'card-demo').join(' ');
+                } else if (this.classList.contains('icon-demo')) {
+                    this.className = 'icon-demo ' + originalClasses.split(' ').filter(c => c !== 'icon-demo').join(' ');
+                } else if (this.classList.contains('btn-demo')) {
+                    this.className = 'btn-demo ' + originalClasses.split(' ').filter(c => c !== 'btn-demo').join(' ');
+                }
+            });
+        });
+        
+        // Demo de animação ao rolar a página
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observar todos os cards de demonstração
+        document.querySelectorAll('.demo-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
