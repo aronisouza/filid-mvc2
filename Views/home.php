@@ -150,7 +150,7 @@
   DB_USER=root
   DB_PASS=123456
   DB_NAME=nome-do-banco
-</code></pre>
+ </code></pre>
         <h4 class="mt-4">Configuração do Apache (.htaccess)</h4>
         <pre>
           <code>RewriteEngine On
@@ -176,7 +176,7 @@
 
         <h4>Criando um Controller</h4>
         <pre>No console digite
-php make controller UserController</pre>
+ php make controller UserController</pre>
         <pre><code>&lt;?php
   class UserController extends Controller
   {
@@ -257,7 +257,7 @@ php make controller UserController</pre>
 
         <h4 class="mt-4">Criando um Model</h4>
         <pre>No console digite
-php make model UserModel</pre>
+ php make model UserModel</pre>
         <pre>
         <pre><code>&lt;?php
   class UserModel
@@ -351,8 +351,13 @@ php make model UserModel</pre>
   * @param string $icone Ícone do erro (opcional)
   * @return void
   */
-  protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error') {
-      setErrorMessage($mensagem, $titulo, $icone);
+  protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error')
+  {
+      $_SESSION['session_message'] = [
+          'mensagem' => $mensagem,
+          'titulo' => $titulo,
+          'icone' => $icone
+      ];
       header("Location: {$redirectUrl}");
       exit;
   }
@@ -372,8 +377,12 @@ php make model UserModel</pre>
   * @param string $titulo Título da mensagem (opcional)
   * @return void
   */
-  protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso') {
-      setSuccessMessage($mensagem, $titulo);
+  protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
+  {
+      $_SESSION['success_tost'] = [
+          'mensagem' => $mensagem,
+          'titulo' => $titulo
+      ];
       header("Location: {$redirectUrl}");
       exit;
   }
