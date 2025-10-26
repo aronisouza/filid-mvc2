@@ -1,17 +1,10 @@
 <?php
 
 session_start();
+
 // Configuração do manipulador de exceções
 set_exception_handler(function ($exception) {
     logError($exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine());
-
-    if (isset($_SESSION)) {
-        setErrorMessage(
-            "Ocorreu um erro inesperado no sistema",
-            "Erro do Sistema",
-            "error"
-        );
-    }
 
     // Redireciona para a página inicial ou exibe um erro
     if (!headers_sent()) {
@@ -29,18 +22,10 @@ set_error_handler(function ($errno, $errstr, $errfile, $errline) {
         return false;
     }
 
-    $mensagem = "Erro [$errno] $errstr em $errfile:$errline";
-    logError($mensagem);
+    logError("Erro [$errno] $errstr em $errfile:$errline");
 
     if (in_array($errno, [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR])) {
-        if (isset($_SESSION)) {
-            setErrorMessage(
-                "Ocorreu um erro crítico no sistema.",
-                "Erro do Sistema",
-                "error"
-            );
-        }
-
+       
         if (!headers_sent()) {
             header('Location: /');
         } else {

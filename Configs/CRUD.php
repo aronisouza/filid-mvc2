@@ -57,7 +57,7 @@ abstract class CRUD extends Conexao
             $this->result = null;
             if ($e->getCode() == 23000) {
                 // 23000 = código SQLSTATE para violação de restrição (ex: UNIQUE)
-                $this->setErrorAndRedirect(
+                $this->setMensageAndRedirect(
                     "Já existe uma relação com os dados informados.",
                     "/listas",
                     "Alerta",

@@ -53,9 +53,9 @@ class Controller
      * 
      *
      */
-    protected static function setErrorAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error')
+    protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error')
     {
-        $_SESSION['error_message'] = [
+        $_SESSION['session_message'] = [
             'mensagem' => $mensagem,
             'titulo' => $titulo,
             'icone' => $icone
@@ -73,9 +73,9 @@ class Controller
      * @param string $titulo Título da mensagem (opcional)
      * @return void
      */
-    protected function setSuccessAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
+    protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
     {
-        $_SESSION['success_message'] = [
+        $_SESSION['success_tost'] = [
             'mensagem' => $mensagem,
             'titulo' => $titulo
         ];
@@ -96,7 +96,7 @@ class Controller
                 session_destroy();
 
                 // redirecionar para login
-                $this->setErrorAndRedirect(
+                $this->setMensageAndRedirect(
                     "Sua sessão expirou por inatividade. Faça login novamente.",
                     "/login",
                     "Erro de Segurança"
@@ -111,7 +111,7 @@ class Controller
             $_SESSION['role'] = null;
             session_unset();
             session_destroy();
-            $this->setErrorAndRedirect(
+            $this->setMensageAndRedirect(
                 "Requisição inválida. Visitante enviado para Home do Site.",
                 "/",
                 "Erro de Segurança"

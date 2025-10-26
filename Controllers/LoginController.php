@@ -10,7 +10,7 @@ class LoginController extends Controller
     public function login()
     {
         if (!$this->validateCsrfToken($_POST['csrf_token'] ?? '')) {
-            $this->setErrorAndRedirect(
+            $this->setMensageAndRedirect(
                 "Requisição inválida. Token inválido.",
                 "/login",
                 "Erro de Segurança"
@@ -19,7 +19,7 @@ class LoginController extends Controller
         $r = new LoginModel();
         $user = $r->login($_POST['email'], $_POST['senha_hash']);
         if (empty($user)) :
-            $this->setErrorAndRedirect(
+            $this->setMensageAndRedirect(
                 "Login ou Senha Errados.",
                 "/login",
                 "Erro de autenticação",
@@ -35,7 +35,7 @@ class LoginController extends Controller
             $_SESSION['created'] = fldCrip($user[0]['id'], 0);
             $_SESSION['last_activity'] = time();
             $_SESSION['base-view'] = 'Controlador';
-            $this->setSuccessAndRedirect(
+            $this->setTostAndRedirect(
                 "Logado com sucesso!",
                 "/Controle",
                 "LOGIN"

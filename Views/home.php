@@ -192,7 +192,7 @@ php make controller UserController</pre>
     {
       // Valida o token CSRF
       if (!$this->validateCsrfToken($_POST['csrf_token'] ?? '')) {
-        $this->setErrorAndRedirect(
+        $this->setMensageAndRedirect(
           "Requisição inválida. Token CSRF inválido.",
           "/Controle/Usuario",
           "Erro de Segurança",
@@ -202,7 +202,7 @@ php make controller UserController</pre>
       }
 
       if (empty($_POST['name']) || empty($_POST['email'])) {
-        $this->setErrorAndRedirect(
+        $this->setMensageAndRedirect(
           "Todos os campos são obrigatórios.",
           "/Controle/Usuario",
           "Erro de Validação",
@@ -212,7 +212,7 @@ php make controller UserController</pre>
       }
 
       if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        $this->setErrorAndRedirect(
+        $this->setMensageAndRedirect(
           "Email inválido. Por favor, informe um email válido.",
           "/Controle/Usuario",
           "Erro de Validação",
@@ -231,12 +231,12 @@ php make controller UserController</pre>
       $result = $userModel->createUser($data);
       
       if ($result) {
-        $this->setSuccessAndRedirect(
+        $this->setTostAndRedirect(
           "Usuário criado com sucesso!",
           "/Controle/Usuario"
         );
       } else {
-        $this->setErrorAndRedirect(
+        $this->setMensageAndRedirect(
           "Erro ao criar usuário. Por favor, tente novamente.",
           "/Controle/Usuario",
           "Erro no Sistema",
@@ -351,13 +351,13 @@ php make model UserModel</pre>
   * @param string $icone Ícone do erro (opcional)
   * @return void
   */
-  protected static function setErrorAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error') {
+  protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error') {
       setErrorMessage($mensagem, $titulo, $icone);
       header("Location: {$redirectUrl}");
       exit;
   }
   //-- Exemplo de uso
-  $this->setErrorAndRedirect(
+  $this->setMensageAndRedirect(
       "Requisição inválida. Token inválido.",
       "/login",
       "Erro de Segurança"
@@ -372,13 +372,13 @@ php make model UserModel</pre>
   * @param string $titulo Título da mensagem (opcional)
   * @return void
   */
-  protected function setSuccessAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso') {
+  protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso') {
       setSuccessMessage($mensagem, $titulo);
       header("Location: {$redirectUrl}");
       exit;
   }
   //-- Exemplo de uso
-  $this->setSuccessAndRedirect(
+  $this->setTostAndRedirect(
       "Logado com sucesso!",
       "/Controle",
       "LOGIN"
@@ -409,7 +409,7 @@ php make model UserModel</pre>
   {       
     // Valida o token CSRF
     if (!$this->validateCsrfToken($_POST['csrf_token'] ?? '')) {
-      $this->setErrorAndRedirect(
+      $this->setMensageAndRedirect(
         "Requisição inválida. Token CSRF inválido.",
         "/Controle/Usuario",
         "Erro de Segurança",

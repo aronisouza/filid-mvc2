@@ -41,7 +41,7 @@ class Conexao extends Controller
 
         } catch (\PDOException $e) {
             logError("Erro PDO: {$e->getMessage()}");
-            Controller::setErrorAndRedirect(
+            Controller::setMensageAndRedirect(
                 "Erro ao conectar ao banco de dados. Por favor, tente novamente.",
                 "/",
                 "Erro de Conexão",

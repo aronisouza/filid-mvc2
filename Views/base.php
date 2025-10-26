@@ -56,8 +56,8 @@
    <?php endif; ?>
 
    <?php
-   displayErrorMessage();
-   displaySuccessMessage();
+   fldPopupMessage();
+   fldTostMessage();
    require_once $content;
    ?>
    <?php if (!strpos($content, 'Login')): ?>

@@ -185,17 +185,17 @@ function fldIco($iconName, $size, $cor = null)
 }
 
 
-function displayErrorMessage()
+function fldPopupMessage()
 {
-  if (isset($_SESSION['error_message'])) {
-    $error = $_SESSION['error_message'];
+  if (isset($_SESSION['session_message'])) {
+    $error = $_SESSION['session_message'];
     fldAlertaPersonalizado(
       $error['titulo'],
       $error['mensagem'],
       $error['icone'],
       'OK'
     );
-    unset($_SESSION['error_message']);
+    unset($_SESSION['session_message']);
   }
 }
 
@@ -204,16 +204,16 @@ function displayErrorMessage()
  * 
  * @return void
  */
-function displaySuccessMessage()
+function fldTostMessage()
 {
-  if (isset($_SESSION['success_message'])) {
-    $success = $_SESSION['success_message'];
+  if (isset($_SESSION['success_tost'])) {
+    $success = $_SESSION['success_tost'];
     fldToastAlert(
       $success['mensagem'],
       'success',
       'center'
     );
-    unset($_SESSION['success_message']);
+    unset($_SESSION['success_tost']);
   }
 }
 

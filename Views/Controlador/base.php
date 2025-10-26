@@ -37,8 +37,8 @@
 </head>
 
 <body>
-    <?php displayErrorMessage();
-    displaySuccessMessage(); ?>
+    <?php fldPopupMessage();
+    fldTostMessage(); ?>
 
     <nav id="sidebar">
         <ul>
