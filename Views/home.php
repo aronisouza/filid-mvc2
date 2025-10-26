@@ -118,7 +118,7 @@
         <div class="card mb-4">
           <div class="card-body">
             <h5 class="card-title">1. Clone o repositório</h5>
-            <pre class="mb-3"><code>  git clone https://github.com/aronisouza/MvcComPainelAdm.git
+            <pre class="mb-3"><code>  git clone https://github.com/aronisouza/filid-mvc2.git
   cd MvcComPainelAdm</code></pre>
             <h5 class="card-title">2. Configure seu servidor web</h5>
             <p class="card-text">Apache/Nginx para apontar para a pasta do projeto</p>

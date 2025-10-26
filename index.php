@@ -67,7 +67,7 @@ $routes = require_once __DIR__ . '/Configs/routes.php';
 
 // Registra as rotas
 foreach ($routes as $route) {
-    $router->addRoute($route[0], $route[1], $route[2], $route[3]);
+    $router->addRoute($route[0], $route[1], $route[2], $route[3] ?? 'index');
 }
 
 $router->dispatch();
