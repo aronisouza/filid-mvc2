@@ -119,7 +119,7 @@
           <div class="card-body">
             <h5 class="card-title">1. Clone o repositório</h5>
             <pre class="mb-3"><code>  git clone https://github.com/aronisouza/filid-mvc2.git
-  cd MvcComPainelAdm</code></pre>
+  cd filid-mvc2</code></pre>
             <h5 class="card-title">2. Configure seu servidor web</h5>
             <p class="card-text">Apache/Nginx para apontar para a pasta do projeto</p>
 
@@ -184,8 +184,7 @@
     {
         // Lista todos os usuários
         $userModel = new UserModel();
-        $users = $userModel->getAllUsers();
-        $this->render('/Controlador/Paginas/usuarios', ['users' => $users]);
+        $this->render('/Controlador/Paginas/usuarios', ['users' => $userModel->getAllUsers()]);
     }
 
     public function create()
@@ -258,13 +257,12 @@
         <h4 class="mt-4">Criando um Model</h4>
         <pre>No console digite
  php make model UserModel</pre>
-        <pre>
         <pre><code>&lt;?php
   class UserModel
   {
     public function getUserById($id){
       $read = new Read();
-      $read->ExeRead('users', "WHERE id={$id}");
+      $read->ExeRead('users', "WHERE id=:id", "id={$id}");
       return $read->getResult();
     }
 
@@ -281,19 +279,29 @@
     public function deleteUser($id) {...}
   }</code></pre>
 
-        <h4 class="mt-1">Definindo Rotas</h4>
-        <p>Arquivo configs/routes.php:</p>
+          <h4 class="mt-4">Criando uma View</h4>
+        <pre>No console digite
+ php make view NomeView Pasta/SubpastaOpcional</pre>
         <pre><code>&lt;?php
+  &lt;section role="main" id="bem-vindo">
+    &lt;div class="my-3">
+        Olá mundo, NomeView!!!
+    &lt;/div>
+&lt;/section></code></pre>
 
+  <h4 class="mt-1">Definindo Rotas</h4>
+  <p>Arquivo configs/routes.php:</p>
+  <pre><code>&lt;?php
   // Arquivo de configuração de rotas
+  // Caso Action for index, não precisa definir, por padrão já é index
   return [
 
     // Rotas básicas do site
-    ['GET', '/', 'HomeController', 'index'],
+    ['GET', '/', 'HomeController'],
 
     //--- rotas de controle carregam view
-    ['GET', '/Controle', 'ControladorController', 'index'],
-    ['GET', '/Controle/Usuario', 'UserController', 'index'],
+    ['GET', '/Controle', 'ControladorController'],
+    ['GET', '/Controle/Usuario', 'UserController'],
     ['GET', '/Controle/Usuario/Edit/{id}', 'UserController', 'edit'],
 
     //--- rotas de ação não carrega view
@@ -302,7 +310,7 @@
     ['POST', '/Usuario/Delete/{id}', 'UserController', 'delete'],
 
     //--- rotas de login
-    ['GET', '/login', 'LoginController', 'index'],
+    ['GET', '/login', 'LoginController'],
     ['POST', '/login/post', 'LoginController', 'login'],
     ['GET', '/logoff', 'LoginController', 'logoff'],
   ];</code></pre>
@@ -318,81 +326,52 @@
           <li>Toast de Alerta</li>
         </ul>
 
-        <h4 class="mt-4">Exemplo de Envio de Mensagens</h4>
-        <pre><code>  /**
-  ** Exibe o alerta com mensagem customizada
-  *- Icones => success, error, warning, info, question
-  *- titulo => Titulo da janela
-  *- mensagem => Escreva a mensagem a ser exibida
-  *- icone => escolha um Icon acima
-  *- confirmButton => Texto do Botão
-  */
-  function fldAlertaPersonalizado($titulo, $mensagem, $icone, $confirmButton)
-  {...}
-
-  /**
-  ** Exibe o alerta TOAST com mensagem customizada
-  *- Icon => success, error, warning, info, question
-  *- mensagem => Escreva a mensagem a ser exibida
-  *- icone => escolha um Icon acima
-  *- posicao => top, top-start, top-end, center, center-start, center-end, bottom, bottom-start, bottom-end
-  */
-  function fldToastAlert($mensagem, $icone, $posicao)
-  {...}</code></pre>
         <h4 class="mt-4">Exemplo em controller</h4>
-        <pre><code>  /**
-  * $icone => success, error, warning, info, question
-  *
-  * Define uma mensagem de erro e redireciona para a URL fornecida
-  * 
-  * @param string $mensagem Mensagem de erro
-  * @param string $redirectUrl URL para redirecionamento
-  * @param string $titulo Título do erro (opcional)
-  * @param string $icone Ícone do erro (opcional)
-  * @return void
-  */
-  protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error', $botao = 'Ok')
-  {
-      $_SESSION['session_message'] = [
-          'mensagem' => $mensagem,
-          'titulo' => $titulo,
-          'icone' => $icone,
-          'botao-texto' => $botao
-      ];
-      header("Location: {$redirectUrl}");
-      exit;
-  }
-  //-- Exemplo de uso
-  $this->setMensageAndRedirect(
-      "Requisição inválida. Token inválido.",
-      "/login",
-      "Erro de Segurança"
-  );
-  
+        <pre><code>// Mensagem modo popup
+if (!$this->validateCsrfToken($_POST['csrf_token'] ?? '')) {
+    $this->setMensageAndRedirect(
+        "Requisição inválida. Token inválido.",
+        "/login",
+        "Erro de Segurança"
+    );
+}
 
-  /**
-  * Define uma mensagem de sucesso e redireciona para a URL fornecida
-  * 
-  * @param string $mensagem Mensagem de sucesso
-  * @param string $redirectUrl URL para redirecionamento
-  * @param string $titulo Título da mensagem (opcional)
-  * @return void
-  */
-  protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
-  {
-      $_SESSION['session_tost'] = [
-          'mensagem' => $mensagem,
-          'titulo' => $titulo
-      ];
-      header("Location: {$redirectUrl}");
-      exit;
-  }
-  //-- Exemplo de uso
-  $this->setTostAndRedirect(
-      "Logado com sucesso!",
-      "/Controle",
-      "LOGIN"
-  );</code></pre>
+// Mensagem modo toast
+$userModel = new UserModel();
+if ($userModel->createUser($data)) {
+    $this->setTostAndRedirect(
+        "Usuário criado com sucesso!",
+        "/Controle/Usuario"
+    );
+}
+
+// Mensagem de confirmação javascript
+&lt;script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.form-excluir').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Confirmar exclusão',
+                text: "Tem certeza que deseja excluir? Ao clicar em SIM não poderá retornar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33000',
+                cancelButtonColor: '#30d670ff',
+                confirmButtonText: 'SIM',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Remove o event listener temporariamente para evitar loop
+                    form.removeEventListener('submit', arguments.callee);
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+</script></code></pre>
       </section>
 
       <!-- Segurança -->
@@ -407,8 +386,7 @@
 
         <h4 class="mt-4">Exemplo de Proteção CSRF</h4>
         <pre>
-          <code>
-  // No formulário
+<code>// No formulário
   &lt;form action="/Usuario/create" method="POST" enctype="multipart/form-data"&gt;
       &lt;?= token(); ?&gt;
       &lt;!-- campos do formulário --&gt;
@@ -430,9 +408,7 @@
 
     // Restante do código
     {...}
-  }
-          </code>
-        </pre>
+  }</code></pre>
       </section>
 
     </div>

@@ -283,74 +283,54 @@ O framework inclui um sistema para envio de mensagens:
 - Popup de Confirmação antes de executar uma ação
 - Toast de Alerta
 
-### Exemplo de Envio de Mensagens
-
-```php
-/**
-** Exibe o alerta com mensagem customizada
-*- Icones => success, error, warning, info, question
-*- titulo => Titulo da janela
-*- mensagem => Escreva a mensagem a ser exibida
-*- icone => escolha um Icon acima
-*- confirmButton => Texto do Botão
-*/
-function fldAlertaPersonalizado($titulo, $mensagem, $icone, $confirmButton)
-{...}
-
-/**
-** Exibe o alerta TOAST com mensagem customizada
-*- Icon => success, error, warning, info, question
-*- mensagem => Escreva a mensagem a ser exibida
-*- icone => escolha um Icon acima
-*- posicao => top, top-start, top-end, center, center-start, center-end, bottom, bottom-start, bottom-end
-*/
-function fldToastAlert($mensagem, $icone, $posicao)
-{...}
-```
-
 ### Exemplo em Controller
 
 ```php
-/**
-* $icone => success, error, warning, info, question
-*
-* Define uma mensagem de erro e redireciona para a URL fornecida
-* 
-* @param string $mensagem Mensagem de erro
-* @param string $redirectUrl URL para redirecionamento
-* @param string $titulo Título do erro (opcional)
-* @param string $icone Ícone do erro (opcional)
-* @return void
-*/
- protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error', $botao = 'Ok')
-    {
-        $_SESSION['session_message'] = [
-            'mensagem' => $mensagem,
-            'titulo' => $titulo,
-            'icone' => $icone,
-            'botao-texto' => $botao
-        ];
-        header("Location: {$redirectUrl}");
-        exit;
-    }
-
-/**
-* Define uma mensagem de sucesso e redireciona para a URL fornecida
-* 
-* @param string $mensagem Mensagem de sucesso
-* @param string $redirectUrl URL para redirecionamento
-* @param string $titulo Título da mensagem (opcional)
-* @return void
-*/
-protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
-{
-    $_SESSION['session_tost'] = [
-        'mensagem' => $mensagem,
-        'titulo' => $titulo
-    ];
-    header("Location: {$redirectUrl}");
-    exit;
+// Mensagem modo popup
+if (!$this->validateCsrfToken($_POST['csrf_token'] ?? '')) {
+    $this->setMensageAndRedirect(
+        "Requisição inválida. Token inválido.",
+        "/login",
+        "Erro de Segurança"
+    );
 }
+
+// Mensagem modo toast
+$userModel = new UserModel();
+if ($userModel->createUser($data)) {
+    $this->setTostAndRedirect(
+        "Usuário criado com sucesso!",
+        "/Controle/Usuario"
+    );
+}
+
+// Mensagem de confirmação javascript
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.form-excluir').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Confirmar exclusão',
+                text: "Tem certeza que deseja excluir? Ao clicar em SIM não poderá retornar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33000',
+                cancelButtonColor: '#30d670ff',
+                confirmButtonText: 'SIM',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Remove o event listener temporariamente para evitar loop
+                    form.removeEventListener('submit', arguments.callee);
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+</script>
 ```
 
 ## Segurança
