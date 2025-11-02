@@ -1,6 +1,7 @@
 <?php
 
 // Arquivo de configuração de rotas
+// Caso Action for index, não precisa definir, por padrão já é index
 return [
     // Rotas básicas do site
     ['GET', '/', 'HomeController'],

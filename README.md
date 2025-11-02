@@ -46,7 +46,7 @@ MVC/
 1. Clone o repositório
 ```bash
 git clone https://github.com/aronisouza/filid-mvc2.git
-cd MvcComPainelAdm
+cd filid-mvc2
 ```
 
 2. Configure seu servidor web
@@ -144,8 +144,7 @@ class UserController extends Controller
     {
         // Lista todos os usuários
         $userModel = new UserModel();
-        $users = $userModel->getAllUsers();
-        $this->render('/Controlador/Paginas/usuarios', ['users' => $users]);
+        $this->render('/Controlador/Paginas/usuarios', ['users' => $userModel->getAllUsers()]);
     }
 
     public function create()
@@ -221,7 +220,7 @@ class UserModel
 {
     public function getUserById($id){
         $read = new Read();
-        $read->ExeRead('users', "WHERE id={$id}");
+        $read->ExeRead('users', "WHERE id=:id", "id={$id}");
         return $read->getResult();
     }
 
@@ -233,19 +232,36 @@ class UserModel
 }
 ```
 
+### Criando uma View
+
+No console digite:
+```bash
+php make view NomeView Pasta/SubpastaOpcional
+```
+
+Exemplo de código:
+```php
+<section role="main" id="bem-vindo">
+    <div class="my-3">
+        Olá mundo, NomeView!!!
+    </div>
+</section>
+```
+
 ### Definindo Rotas
 
 Arquivo `configs/routes.php`:
 ```php
 <?php
 // Arquivo de configuração de rotas
+// Caso Action for index, não precisa definir, por padrão já é index
 return [
     // Rotas básicas do site
-    ['GET', '/', 'HomeController', 'index'],
+    ['GET', '/', 'HomeController'],
 
     //--- rotas de controle carregam view
-    ['GET', '/Controle', 'ControladorController', 'index'],
-    ['GET', '/Controle/Usuario', 'UserController', 'index'],
+    ['GET', '/Controle', 'ControladorController'],
+    ['GET', '/Controle/Usuario', 'UserController'],
     ['GET', '/Controle/Usuario/Edit/{id}', 'UserController', 'edit'],
 
     //--- rotas de ação não carrega view
@@ -254,7 +270,7 @@ return [
     ['POST', '/Usuario/Delete/{id}', 'UserController', 'delete'],
 
     //--- rotas de login
-    ['GET', '/login', 'LoginController', 'index'],
+    ['GET', '/login', 'LoginController'],
     ['POST', '/login/post', 'LoginController', 'login'],
     ['GET', '/logoff', 'LoginController', 'logoff'],
 ];
@@ -306,16 +322,17 @@ function fldToastAlert($mensagem, $icone, $posicao)
 * @param string $icone Ícone do erro (opcional)
 * @return void
 */
-protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error')
-{
-    $_SESSION['session_message'] = [
-        'mensagem' => $mensagem,
-        'titulo' => $titulo,
-        'icone' => $icone
-    ];
-    header("Location: {$redirectUrl}");
-    exit;
-}
+ protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error', $botao = 'Ok')
+    {
+        $_SESSION['session_message'] = [
+            'mensagem' => $mensagem,
+            'titulo' => $titulo,
+            'icone' => $icone,
+            'botao-texto' => $botao
+        ];
+        header("Location: {$redirectUrl}");
+        exit;
+    }
 
 /**
 * Define uma mensagem de sucesso e redireciona para a URL fornecida
@@ -327,7 +344,7 @@ protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo
 */
 protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
 {
-    $_SESSION['success_tost'] = [
+    $_SESSION['session_tost'] = [
         'mensagem' => $mensagem,
         'titulo' => $titulo
     ];
@@ -338,7 +355,7 @@ protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucess
 
 ## Segurança
 
-O framework inclui várias medidas de segurança:
+O framework inclui algumas medidas de segurança:
 - Proteção contra CSRF
 - Validação de dados
 - Escape de saída HTML

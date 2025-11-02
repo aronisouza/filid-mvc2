@@ -2,8 +2,8 @@
   <p class="display-4 fw-bold h2">Filid-MVC</p>
   <p class="lead">Um framework PHP simples e eficiente para desenvolvimento web</p>
   <div class="mt-4">
-    <a href="#instalacao" class="btn btn-primary btn-lg px-4 me-2 animate-bounce delay-2s">Começar</a>
-    <a href="https://github.com/aronisouza/MvcComPainelAdm" class="btn btn-outline-light btn-lg px-4"
+    <a href="#instalacao" class="btn btn-primary btn-lg px-4 me-2 hover-animate-pulse delay-2s">Começar</a>
+    <a href="https://github.com/aronisouza/filid-mvc2" class="btn btn-outline-light btn-lg px-4 animation-box hover-animate-shake"
       target="_blank">
       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
@@ -13,7 +13,7 @@
   <!-- Features -->
   <section class="row g-4 py-5">
     <div class="col-md-4">
-      <div class="feature-icon text-center">
+      <div class="feature-icon text-center hover-animate-pulse">
         <?= fldIco("stacks", 50, "text-dark"); ?>
       </div>
       <h3 class="text-center">Padrão MVC</h3>
@@ -21,14 +21,14 @@
         Estrutura organizada seguindo o padrão Model-View-Controller para separação clara de responsabilidades.</p>
     </div>
     <div class="col-md-4">
-      <div class="feature-icon text-center">
+      <div class="feature-icon text-center hover-animate-pulse">
         <?= fldIco("shield_lock", 50, "text-dark"); ?>
       </div>
       <h3 class="text-center">Segurança</h3>
       <p class="text-center">Proteção CSRF, headers de segurança e validação de dados para aplicações mais seguras.</p>
     </div>
     <div class="col-md-4">
-      <div class="feature-icon text-center">
+      <div class="feature-icon text-center hover-animate-pulse">
         <?= fldIco("electric_bolt", 50, "text-dark"); ?>
       </div>
       <h3 class="text-center">Rápido</h3>
@@ -351,12 +351,13 @@
   * @param string $icone Ícone do erro (opcional)
   * @return void
   */
-  protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error')
+  protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error', $botao = 'Ok')
   {
       $_SESSION['session_message'] = [
           'mensagem' => $mensagem,
           'titulo' => $titulo,
-          'icone' => $icone
+          'icone' => $icone,
+          'botao-texto' => $botao
       ];
       header("Location: {$redirectUrl}");
       exit;
@@ -379,7 +380,7 @@
   */
   protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
   {
-      $_SESSION['success_tost'] = [
+      $_SESSION['session_tost'] = [
           'mensagem' => $mensagem,
           'titulo' => $titulo
       ];
@@ -398,7 +399,7 @@
       <section id="seguranca" class="py-1">
         <h2 class="border-bottom border-dark pb-2">Segurança</h2>
         <p>O framework inclui algumas medidas de segurança:</p>
-        <ul>
+        <ul class="ms-3">
           <li>Proteção contra CSRF</li>
           <li>Validação de dados</li>
           <li>Escape de saída HTML</li>

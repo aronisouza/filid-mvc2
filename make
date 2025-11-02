@@ -129,7 +129,7 @@ function createModel($name)
 function createView($name, $extra)
 {
     if (!$extra) {
-        echo "Uso para view: php make.php view NomeView Pasta/SubpastaOpcional\n";
+        echo "Uso para view: php make view NomeView Pasta/SubpastaOpcional\n";
         exit(1);
     }
 
@@ -151,7 +151,7 @@ function createView($name, $extra)
 
     if (!file_exists($file)) {
         $content = <<<PHP
-        <section id="bem-vindo">
+        <section role="main" id="bem-vindo">
             <div class="my-3">
                 Olá mundo, {$name}!!!
             </div>

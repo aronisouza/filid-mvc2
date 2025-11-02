@@ -53,12 +53,13 @@ class Controller
      * 
      *
      */
-    protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error')
+    protected static function setMensageAndRedirect($mensagem, $redirectUrl, $titulo = 'Erro', $icone = 'error', $botao = 'Ok')
     {
         $_SESSION['session_message'] = [
             'mensagem' => $mensagem,
             'titulo' => $titulo,
-            'icone' => $icone
+            'icone' => $icone,
+            'botao-texto' => $botao
         ];
         header("Location: {$redirectUrl}");
         exit;
@@ -75,7 +76,7 @@ class Controller
      */
     protected function setTostAndRedirect($mensagem, $redirectUrl, $titulo = 'Sucesso')
     {
-        $_SESSION['success_tost'] = [
+        $_SESSION['session_tost'] = [
             'mensagem' => $mensagem,
             'titulo' => $titulo
         ];

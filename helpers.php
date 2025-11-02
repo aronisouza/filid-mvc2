@@ -193,7 +193,7 @@ function fldPopupMessage()
       $error['titulo'],
       $error['mensagem'],
       $error['icone'],
-      'OK'
+      $error['botao-texto']
     );
     unset($_SESSION['session_message']);
   }
@@ -206,14 +206,14 @@ function fldPopupMessage()
  */
 function fldTostMessage()
 {
-  if (isset($_SESSION['success_tost'])) {
-    $success = $_SESSION['success_tost'];
+  if (isset($_SESSION['session_tost'])) {
+    $success = $_SESSION['session_tost'];
     fldToastAlert(
       $success['mensagem'],
       'success',
       'center'
     );
-    unset($_SESSION['success_tost']);
+    unset($_SESSION['session_tost']);
   }
 }
 

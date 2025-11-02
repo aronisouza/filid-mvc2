@@ -54,7 +54,6 @@
          </div>
       </nav>
    <?php endif; ?>
-
    <?php
    fldPopupMessage();
    fldTostMessage();
