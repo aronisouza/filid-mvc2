@@ -2,6 +2,10 @@
 
 Um framework PHP simples e eficiente para desenvolvimento web
 
+Imagens de projetos feitos com Filid-MVC
+
+<img src="https://aronisouza.com.br/Public/Images/outras-img/Lista-de-Compra.png" alt="Filid-MVC Logo" width="300"/> <img src="https://aronisouza.com.br/Public/Images/Projetos/Sistema-Resifin.webp" alt="Filid-MVC Logo" width="300"/> <img src="https://aronisouza.com.br/Public/Images/Projetos/Filid-MVC.webp" alt="Filid-MVC Logo" width="300"/>
+
 ## Visão Geral
 
 O Filid-MVC é um framework que implementa o padrão MVC, dividindo a aplicação em três camadas principais:
