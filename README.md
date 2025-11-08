@@ -79,13 +79,83 @@ php make env
 
 ## Configuração
 
-### Banco de Dados
+### Banco de Dados Mysql
 Edite o arquivo `.env` com suas credenciais de banco de dados:
 ```env
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=123456
 DB_NAME=nome-do-banco
+```
+
+Rode o comando para gerar as CRIP_KEY, CRIP_IV e CRIP_TAG<br>
+<strong>Note:</strong> Usar o comando abaixo no terminal apenas uma vez para gerar as chaves de criptografia
+```bash
+php make env
+```
+
+## Migrations
+
+Crie suas tabelas na pasta Migrations.<br>
+O nome do arquivo deve seguir o padrão: `{000}-Create{nome_da_tabela}Table.php`<br>
+Exemplo: `001-CreateUsersTable.php`
+
+Exemplo de Migration para criar a tabela users
+```php
+<?php
+
+class CreateUsersTable extends Migration
+{
+    public function up()
+    {
+        $this->createTable('users', [
+            '`id` INT AUTO_INCREMENT PRIMARY KEY',
+            '`nome` VARCHAR(255) NOT NULL',
+            '`email` VARCHAR(255) NOT NULL UNIQUE',
+            '`senha_hash` VARCHAR(255) NOT NULL',
+            '`status` ENUM("active", "inactive") NOT NULL DEFAULT "active"',
+            '`role` ENUM("admin", "user") NOT NULL DEFAULT "user"',
+            '`created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+            '`updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'
+        ]);
+        $this->addIndex('users', 'idx_user_email', 'email');
+    }
+
+    public function down()
+    {
+        $this->dropTable('users');
+    }
+}
+```
+### Funções disponíveis na classe Migration
+function up()
+```php
+createTable - Cria tabela
+ex: $this->createTable('users',[arrays de colunas]);
+
+addIndex - Adiciona índices a tabela
+ex: $this->addIndex('users', 'idx_user_email', 'email');
+
+addPrimaryKey - Adiciona chave primária
+ex: $this->addPrimaryKey('users', 'id');
+
+addUniqueKey - Adiciona chave única
+ex: $this->addUniqueKey('users', 'email');
+
+addForeignKey - Adiciona chave estrangeira
+ex: $this->addForeignKey('orders', 'fk_user_order', 'user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+
+modifyColumn - Modifica coluna
+ex: $this->modifyColumn('users', 'email', 'VARCHAR(320) NOT NULL UNIQUE');
+
+dropIndex - Remove índice
+ex: $this->dropIndex('users', 'idx_user_email');
+```
+
+function down()
+```php
+dropTable - Remove tabela
+ex: $this->dropTable('users');
 ```
 
 ### Configuração do Apache (.htaccess)
