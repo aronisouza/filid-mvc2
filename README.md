@@ -2,6 +2,10 @@
 
 Um framework PHP simples e eficiente para desenvolvimento web
 
+Imagens de projetos feitos com Filid-MVC
+
+<img src="https://aronisouza.com.br/Public/Images/outras-img/Lista-de-Compra.png" alt="Filid-MVC Logo" width="300"/> <img src="https://aronisouza.com.br/Public/Images/Projetos/Sistema-Resifin.webp" alt="Filid-MVC Logo" width="300"/> <img src="https://aronisouza.com.br/Public/Images/Projetos/Filid-MVC.webp" alt="Filid-MVC Logo" width="300"/>
+
 ## Visão Geral
 
 O Filid-MVC é um framework que implementa o padrão MVC, dividindo a aplicação em três camadas principais:
@@ -66,9 +70,11 @@ DB_NAME=nome-do-banco
 SITE_URL=http://seu-site.com
 SITE_TITLE=Filid-MVC
 SITE_NOME=Filid-MVC
-CRIP_KEY=7hf9f$5jh!xQ2@v4tzW3@E6kT$LH4jY0cF
-CRIP_IV=9150918521046936
-CRIP_TAG=Kdsfk32fSDF2
+```
+5. rode o comando para gerar as CRIP_KEY, CRIP_IV e CRIP_TAG<br>
+<strong>Note:</strong> Usar o comando abaixo no terminal apenas uma vez para gerar as chaves de criptografia
+```bash
+php make env
 ```
 
 ## Configuração
@@ -130,7 +136,7 @@ ErrorDocument 403 https://github.com/aronisouza
 
 ### Criando um Controller
 
-No console digite:
+No terminal digite:
 ```bash
 php make controller UserController
 ```
@@ -208,7 +214,7 @@ class UserController extends Controller
 
 ### Criando um Model
 
-No console digite:
+No terminal digite:
 ```bash
 php make model UserModel
 ```
@@ -234,7 +240,7 @@ class UserModel
 
 ### Criando uma View
 
-No console digite:
+No terminal digite:
 ```bash
 php make view NomeView Pasta/SubpastaOpcional
 ```

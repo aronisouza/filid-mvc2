@@ -7,12 +7,14 @@
 //   php make model User
 //   php make view Home index
 
-if ($argc < 3) {
+// Permite comandos que não precisam de segundo argumento (ex: env)
+if ($argc < 2 || ($argc < 3 && strtolower($argv[1] ?? '') !== 'env')) {
     echo "Uso: php make [tipo] [Nome] [extra]\n";
     echo "Tipos disponíveis:\n";
     echo "  controller NomeController\n";
     echo "  model NomeModel\n";
     echo "  view Pasta NomeView\n";
+    echo "  env (gera/atualiza CRIP_KEY, CRIP_IV, CRIP_TAG no .env)\n";
     exit(1);
 }
 
@@ -36,6 +38,11 @@ switch ($type) {
 
     case 'view':
         createView($name, $extra);
+        break;
+
+    case 'env':
+        // Gera/atualiza chaves no arquivo .env (CRIP_KEY, CRIP_IV, CRIP_TAG)
+        generateEnv();
         break;
 
     default:
@@ -162,3 +169,74 @@ function createView($name, $extra)
     file_put_contents($file, $content);
     echo "View {$extra} criada em {$file}\n";
 }
+
+function generateEnv()
+{
+    $envFile = __DIR__ . '/.env';
+
+    // cria backup se existir
+    if (file_exists($envFile)) {
+        $backup = $envFile . '.bak.' . date('YmdHis');
+        if (!copy($envFile, $backup)) {
+            echo "Falha ao criar backup do .env em $backup\n";
+            return;
+        }
+        echo "Backup criado: $backup\n";
+        $content = file_get_contents($envFile);
+    } else {
+        $content = '';
+    }
+
+    // Geradores de valores
+    $key = generateRandomString(48); // CRIP_KEY
+    $iv = generateNumericString(16); // CRIP_IV (16 dígitos)
+    $tag = generateRandomString(8, false); // CRIP_TAG
+
+    $replacements = [
+        'CRIP_KEY' => $key,
+        'CRIP_IV' => $iv,
+        'CRIP_TAG' => $tag,
+    ];
+
+    foreach ($replacements as $k => $v) {
+        if (preg_match('/^' . preg_quote($k, '/') . '=/m', $content)) {
+            $content = preg_replace('/^' . preg_quote($k, '/') . '=.*$/m', $k . '=' . $v, $content);
+        } else {
+            $content .= ($content === '' ? '' : PHP_EOL) . $k . '=' . $v;
+        }
+    }
+
+    // garante quebra de linha final
+    $content = rtrim($content, "\n") . "\n";
+
+    if (file_put_contents($envFile, $content) === false) {
+        echo "Erro ao escrever em $envFile\n";
+        return;
+    }
+
+    echo ".env atualizado: $envFile\n";
+    echo "CRIP_KEY=$key\nCRIP_IV=$iv\nCRIP_TAG=$tag\n";
+}
+
+function generateRandomString($length = 32, $useSymbols = true)
+{
+    $alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $symbols = '!@#$%^&*-_=+?,.';
+    $chars = $alpha . ($useSymbols ? $symbols : '');
+    $max = strlen($chars) - 1;
+    $str = '';
+    for ($i = 0; $i < $length; $i++) {
+        $str .= $chars[random_int(0, $max)];
+    }
+    return $str;
+}
+
+function generateNumericString($length = 16)
+{
+    $str = '';
+    for ($i = 0; $i < $length; $i++) {
+        $str .= (string) random_int(0, 9);
+    }
+    return $str;
+}
+
